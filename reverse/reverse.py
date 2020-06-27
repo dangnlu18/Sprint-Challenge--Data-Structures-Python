@@ -24,6 +24,8 @@ class LinkedList:
 
         self.head = node
 
+
+
     def contains(self, value):
         if not self.head:
             return False
@@ -39,4 +41,5 @@ class LinkedList:
         return False
 
     def reverse_list(self, node, prev):
-        pass
+
+
