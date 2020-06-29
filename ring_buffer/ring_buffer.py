@@ -1,28 +1,22 @@
-class Node:
-    def __init__(self, val):
-        self.val = val
-        self.next = None
-        self.prev = None
+from collections import deque
 
 class RingBuffer:
-    def __init__(self, capacity=0):
+    def __init__(self, capacity):
         self.capacity = capacity
         self.store = []
-        self.cache = []
+        self.q = deque()
 
     def append(self, item):
+        new_node = Node(item)
         if len(self.store) < self.capacity:
             self.store.append(item)
-
+            self.q.append(item)
         else:
-            self.cache.append(item)
-  
+            self.q.append(item)
+            evict = self.q.popleft()
+            index_in_store = self.store.index(evict)
+            self.store[index_in_store] = item
+
 
     def get(self):
-        if len(self.cache) > 0:
-            for i in range(len(self.cache)):
-                print(self.cache)
-            self.cache.extend(self.store[len(self.cache):])
-            return self.cache[:self.capacity]
-        else: 
-            return self.store
+        return self.store
