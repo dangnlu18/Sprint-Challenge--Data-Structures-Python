@@ -7,7 +7,6 @@ class RingBuffer:
         self.q = deque()
 
     def append(self, item):
-        new_node = Node(item)
         if len(self.store) < self.capacity:
             self.store.append(item)
             self.q.append(item)
